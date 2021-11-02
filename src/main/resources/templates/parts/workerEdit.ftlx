@@ -1,0 +1,84 @@
+<#macro workerEdit path isWorkerEdit>
+<strong><#if isWorkerEdit>Редактирование работника<#else>Добавление нового работника</#if></strong>
+    <form <#if isWorkerEdit>action="/worker"<#else>action="/worker/add"</#if> method="post">
+    <div class="form-group row mt-3">
+        <label class="col-sm-2 col-form-label">Логин:</label>
+        <div class="col-sm-5">
+            <input type="text" name="username" <#if isWorkerEdit>value="${worker.username}"</#if>
+                   class="form-control" placeholder="Логин"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Пароль:</label>
+        <div class="col-sm-5">
+            <input type="password" name="password" <#if isWorkerEdit>value="${worker.password}"</#if>
+                   class="form-control"
+                   placeholder="Пароль"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">ФИО:</label>
+        <div class="col-sm-5">
+            <input type="text" name="fullname" <#if isWorkerEdit>value="${worker.fullName}"</#if>
+                   class="form-control" placeholder="Фамилия Имя Отчество полностью"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Должность:</label>
+        <div class="col-sm-5">
+            <input type="text" name="position" <#if isWorkerEdit>value="${worker.position}"</#if>
+                   class="form-control" placeholder="Должность"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Телефон:</label>
+        <div class="col-sm-5">
+            <input type="text" name="phone" <#if isWorkerEdit>value="${worker.phone}"</#if>
+                   class="form-control" placeholder="Телефон"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">ИНН:</label>
+        <div class="col-sm-5">
+            <input type="text" name="inn" <#if isWorkerEdit>value="${worker.inn}"</#if>
+                   class="form-control" placeholder="ИНН"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Оклад:</label>
+        <div class="col-sm-5">
+            <input type="number" name="salary" <#if isWorkerEdit>value="${worker.salary}"</#if>
+                   class="form-control"/>
+        </div>
+    </div>
+
+    <#list roles as role>
+              <label>
+                  <input type="checkbox"
+                         name="${role}"
+        <#if isWorkerEdit>
+            ${worker.roles?seq_contains(role)?string("checked", "")}
+        </#if>
+                  >${role.getName()}
+              </label>
+    </#list>
+
+        <#if isWorkerEdit>
+            <div>
+                <label>
+                    <input type="checkbox" name="fired" ${worker.fired?string("checked", "")}>Уволен
+                </label>
+            </div>
+        </#if>
+
+        <#if isWorkerEdit><input type="hidden" value="${worker.id}" name="workerId"></#if>
+    <input type="hidden" value="${_csrf.token}" name="_csrf">
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+    </form>
+</#macro>

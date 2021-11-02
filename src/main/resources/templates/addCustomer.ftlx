@@ -1,0 +1,6 @@
+<#import "parts/common.ftlx" as c>
+<#import "parts/customerEdit.ftlx" as w>
+
+<@c.page>
+    <@w.customerEdit "/addCustomer" false/>
+</@c.page>

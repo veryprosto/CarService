@@ -1,0 +1,7 @@
+<#import "parts/common.ftlx" as c>
+
+<@c.page>
+    <h5>Hello, guest</h5>
+    <div>This is demo page of car service site</div>
+</@c.page>
+

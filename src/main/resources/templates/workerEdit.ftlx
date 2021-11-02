@@ -1,0 +1,6 @@
+<#import "parts/common.ftlx" as c>
+<#import "parts/workerEdit.ftlx" as w>
+
+<@c.page>
+    <@w.workerEdit "/workerEdit" true/>
+</@c.page>
