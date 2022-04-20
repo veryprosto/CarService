@@ -1,0 +1,133 @@
+<#macro carEdit path isCarEdit>
+<strong><#if isCarEdit>Редактирование автомобиля<#else>Добавление нового автомобиля</#if></strong>
+    <form <#if isCarEdit>action="/car"<#else>action="/car/add"</#if> method="post">
+
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">Гос. номер:</label>
+        <div class="col-sm-4">
+            <input type="text" name="car_gov_number" <#if isCarEdit>value="${car.car_gov_number}"</#if>
+                   class="form-control" placeholder="Гос. номер"/>
+        </div>
+    </div>
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">Марка:</label>
+        <div class="col-sm-4">
+            <select id="inputState" class="form-control" name="car_mark">
+                <option selected><#if isCarEdit>value="${car.car_model.getCar_mark()}""<#else>Марка</#if></option>
+                <#list marks as mark>
+                    <option value=${mark.car_mark_id}>${mark.car_mark_name}</option>
+                </#list>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="bi bi-plus-square"></i>
+            </button>
+        </div>
+    </div>
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">Модель:</label>
+        <div class="col-sm-4">
+            <input type="text" name="car_model" <#if isCarEdit>value="${car.car_model}"</#if>
+                   class="form-control" placeholder="Модель">
+        </div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="bi bi-plus-square"></i>
+            </button>
+        </div>
+    </div>
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">Цвет кузова:</label>
+        <div class="col-sm-4">
+            <input type="text" name="car_color" <#if isCarEdit>value="${car.car_color}"</#if>
+                   class="form-control" placeholder="Цвет кузова">
+        </div>
+    </div>
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">Год выпуска:</label>
+        <div class="col-sm-4">
+            <input type="text" name="car_year" <#if isCarEdit>value="${car.car_year}"</#if>
+                   class="form-control" placeholder="Год выпуска">
+        </div>
+    </div>
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">Коробка передач:</label>
+        <div class="col-sm-4">
+            <input type="text" name="car_transmission" <#if isCarEdit>value="${car.car_transmission}"</#if>
+                   class="form-control" placeholder="Коробка передач">
+        </div>
+    </div>
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">Объем двигателя:</label>
+        <div class="col-sm-4">
+            <input type="text" name="car_engine_capacity" <#if isCarEdit>value="${car.car_engine_capacity}"</#if>
+                   class="form-control" placeholder="Объем двигателя">
+        </div>
+    </div>
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">Тип двигателя:</label>
+        <div class="col-sm-4">
+            <input type="text" name="car_engine_type" <#if isCarEdit>value="${car.car_engine_type}"</#if>
+                   class="form-control" placeholder="Тип двигателя">
+        </div>
+    </div>
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">VIN:</label>
+        <div class="col-sm-4">
+            <input type="text" name="car_vin" <#if isCarEdit>value="${car.car_vin}"</#if>
+                   class="form-control" placeholder="VIN">
+        </div>
+    </div>
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">Тип кузова:</label>
+        <div class="col-sm-4">
+            <input type="text" name="car_body" <#if isCarEdit>value="${car.car_body}"</#if>
+                   class="form-control" placeholder="Тип кузова">
+        </div>
+    </div>
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">Привод:</label>
+        <div class="col-sm-4">
+            <input type="text" name="car_drive" <#if isCarEdit>value="${car.car_drive}"</#if>
+                   class="form-control" placeholder="Привод">
+        </div>
+    </div>
+    <div class="form-group row mt-1 gx-1">
+        <label class="col-sm-2 col-form-label">Владелец:</label>
+        <div class="col-sm-4">
+            <select id="inputState" class="form-control" name="owner">
+                <option selected>Владелец</option>
+                <#list customers as customer>
+                    <option value=${customer.id}>${customer.fullName}</option>
+                </#list>
+            </select>
+        </div>
+    </div>
+
+    <input type="hidden" value="${_csrf.token}" name="_csrf">
+    <button class="btn btn-primary" type="submit">сохранить</button>
+
+       <!-- Модальное окно -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Марка автомобиля</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-6">
+                        <input type="text" name="car_mark" class="form-control" placeholder="Марка">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <input type="hidden" value="${_csrf.token}" name="_csrf">
+                    <button class="btn btn-primary" type="submit" data-bs-dismiss="modal">сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</#macro>

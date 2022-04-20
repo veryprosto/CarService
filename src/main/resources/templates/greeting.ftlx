@@ -1,7 +1,9 @@
+<#include "parts/security.ftlx">
 <#import "parts/common.ftlx" as c>
+<#import "login.ftlx" as l>
 
 <@c.page>
-    <h5>Hello, guest</h5>
-    <div>This is demo page of car service site</div>
+    <h5>Добрый день, ${username}</h5>
+    <div>Добро пожаловать в систему CarService</div>
 </@c.page>
 

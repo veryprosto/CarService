@@ -74,7 +74,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark bg-dark">
                                 <li><a class="dropdown-item" href="/customer">Клиенты</a></li>
                                 <li><a class="dropdown-item" href=#>Группы</a></li>
-                                <li><a class="dropdown-item" href=#>Автомобили</a></li>
+                                <li><a class="dropdown-item" href=/car>Автомобили</a></li>
                                 <li><a class="dropdown-item" href=#>Акты сверки</a></li>
                             </ul>
                         </li>
