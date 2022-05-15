@@ -1,0 +1,46 @@
+<#import "parts/common.ftlx" as c>
+
+<@c.page>
+    <strong>АВТОМОБИЛИ</strong>
+    <table class="table table-striped mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Марка</th>
+                <th scope="col">Модель</th>
+                <th scope="col">Гос. номер</th>
+                <th scope="col">Владелец</th>
+                <th scope="col">Телефон владельца</th>
+                <th>
+                    <form action="/car/add" method="get">
+                        <button class="btn btn-primary" type="submit">Добавить автомобиль</button>
+                    </form>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <#list cars as car>
+                <tr>
+                    <td>${car.car_model.getCarMark().name}</td>
+                    <td>${car.car_model.name}</td>
+                    <td>${car.car_gov_number}</td>
+                    <td>${car.owner.fullName}</td>
+                    <td>${car.owner.phone}</td>
+                    <td>
+                        <form action="/car/${car.car_gov_number}" method="get">
+                            <button class="btn btn-primary" type="submit">Редактировать</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/car/delete" method="post">
+                            <input type="hidden" value="${car.car_gov_number}" name="car_gov_number">
+                            <input type="hidden" value="${_csrf.token}" name="_csrf">
+                            <button class="btn btn-primary" type="submit">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            </#list>
+        </tbody>
+    </table>
+</@c.page>
+

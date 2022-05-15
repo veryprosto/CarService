@@ -2,21 +2,34 @@
 <strong><#if isCarEdit>Редактирование автомобиля<#else>Добавление нового автомобиля</#if></strong>
     <form <#if isCarEdit>action="/car"<#else>action="/car/add"</#if> method="post">
 
+ <div class="form-group row mt-1 gx-1">
+     <label class="col-sm-2 col-form-label">Гос. номер:</label>
+     <div class="col-sm-4">
+         <input type="text" name="car_gov_number" <#if isCarEdit>value="${car.car_gov_number}"</#if>
+                class="form-control" placeholder="Гос. номер"/>
+     </div>
+ </div>
+
+<#-- <div class="form-group row mt-1 gx-1">
+     <label class="col-sm-2 col-form-label">ываыва</label>
+     <div class="col-sm-4">
+         <select id="inputState" class="form-control" name="car_mark">
+             <option selected><#if isCarEdit>${car.getCar_model().getCar_mark().name}<#else>Марка2</#if></option>
+             <#list carmarks as carmark>
+                 <option value=${carmark.id}>${carmark.name}</option>
+             </#list>
+         </select>
+     </div>
+ </div>-->
+
     <div class="form-group row mt-1 gx-1">
-        <label class="col-sm-2 col-form-label">Гос. номер:</label>
+        <label class="col-sm-2 col-form-label">Модель:</label>
         <div class="col-sm-4">
-            <input type="text" name="car_gov_number" <#if isCarEdit>value="${car.car_gov_number}"</#if>
-                   class="form-control" placeholder="Гос. номер"/>
-        </div>
-    </div>
-    <div class="form-group row mt-1 gx-1">
-        <label class="col-sm-2 col-form-label">Марка:</label>
-        <div class="col-sm-4">
-            <select id="inputState" class="form-control" name="car_mark">
-                <option selected><#if isCarEdit>value="${car.car_model.getCar_mark()}""<#else>Марка</#if></option>
-                <#list marks as mark>
-                    <option value=${mark.car_mark_id}>${mark.car_mark_name}</option>
-                </#list>
+            <select id="inputState" class="form-control" name="car_model">
+
+                    <#list carmodels as carmodel>
+                        <option value=${carmodel.id}>${carmodel.name}</option>
+                    </#list>
             </select>
         </div>
         <div class="col-sm-3">
@@ -25,18 +38,7 @@
             </button>
         </div>
     </div>
-    <div class="form-group row mt-1 gx-1">
-        <label class="col-sm-2 col-form-label">Модель:</label>
-        <div class="col-sm-4">
-            <input type="text" name="car_model" <#if isCarEdit>value="${car.car_model}"</#if>
-                   class="form-control" placeholder="Модель">
-        </div>
-        <div class="col-sm-3">
-            <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="bi bi-plus-square"></i>
-            </button>
-        </div>
-    </div>
+
     <div class="form-group row mt-1 gx-1">
         <label class="col-sm-2 col-form-label">Цвет кузова:</label>
         <div class="col-sm-4">
@@ -93,14 +95,15 @@
                    class="form-control" placeholder="Привод">
         </div>
     </div>
+
     <div class="form-group row mt-1 gx-1">
         <label class="col-sm-2 col-form-label">Владелец:</label>
         <div class="col-sm-4">
             <select id="inputState" class="form-control" name="owner">
                 <option selected>Владелец</option>
-                <#list customers as customer>
-                    <option value=${customer.id}>${customer.fullName}</option>
-                </#list>
+            <#list customers as customer>
+                <option value=${customer.id}>${customer.fullName}</option>
+            </#list>
             </select>
         </div>
     </div>
@@ -108,7 +111,10 @@
     <input type="hidden" value="${_csrf.token}" name="_csrf">
     <button class="btn btn-primary" type="submit">сохранить</button>
 
+    </form>
+
        <!-- Модальное окно -->
+    <form action="/car/addmark" method="post">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -118,7 +124,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-6">
-                        <input type="text" name="car_mark" class="form-control" placeholder="Марка">
+                        <input type="text" name="car_mark_name" class="form-control" placeholder="Марка">
                     </div>
                 </div>
                 <div class="modal-footer">

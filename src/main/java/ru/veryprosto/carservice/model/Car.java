@@ -10,7 +10,7 @@ public class Car {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_model_id")
-    private Car_model car_model;
+    private CarModel car_model;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
@@ -24,7 +24,6 @@ public class Car {
     private String car_drive;
     private String car_transmission;
     private String car_vin;
-    private String customer;
     private String note;
     private Boolean car_conditioner;
     private Boolean car_abs;
@@ -61,11 +60,11 @@ public class Car {
         this.owner = owner;
     }
 
-    public Car_model getCar_model() {
+    public CarModel getCar_model() {
         return car_model;
     }
 
-    public void setCar_model(Car_model car_model) {
+    public void setCar_model(CarModel car_model) {
         this.car_model = car_model;
     }
 
@@ -133,14 +132,6 @@ public class Car {
         this.car_vin = car_vin;
     }
 
-    public String getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
-
     public String getNote() {
         return note;
     }
@@ -197,7 +188,7 @@ public class Car {
         this.filename = filename;
     }
 
-    public Car_mark getCarMark(){
-        return getCar_model().getCar_mark();
+    public CarMark getCarMark(){
+        return getCar_model().getCarMark();
     }
 }
